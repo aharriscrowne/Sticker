@@ -133,6 +133,7 @@ half4 applyFoil(float2 position,
                 half4 color,
                 constant FoilUniforms& u)
 {
+    half originalAlpha = color.a;
     float2 size = u.size;
 
     // Calculate aspect ratio (width / height)
@@ -163,13 +164,16 @@ half4 applyFoil(float2 position,
 
     // In the original foil() the blendFactor wasn’t used; here we use it
     // to control how much foil replaces the original.
-    return mix(color, noiseCheckerFoil, u.blendFactor);
+    half4 result = mix(color, noiseCheckerFoil, u.blendFactor);
+    result.a = originalAlpha;
+    return result;
 }
 
 half4 applyReflection(float2 position,
                       half4 color,
                       constant FoilUniforms& u)
 {
+    half originalAlpha = color.a;
     float2 uv = position / u.size;
 
     float d = distance(uv, u.reflectionPosition);
@@ -181,7 +185,9 @@ half4 applyReflection(float2 position,
     half4 reflectionColor = half4(1.0, 1.0, 1.0, u.reflectionIntensity * blurFactor);
 
     // Blend the reflection with the original color
-    return mix(color, reflectionColor, reflectionColor.a);
+    half4 outColor = mix(color, reflectionColor, reflectionColor.a);
+    outColor.a = originalAlpha;
+    return outColor;
 }
 
 // ===== Classic vertex + fragment entry points =====
