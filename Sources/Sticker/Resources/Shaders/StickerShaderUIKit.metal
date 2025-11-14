@@ -166,6 +166,8 @@ half4 applyFoil(float2 position,
     // to control how much foil replaces the original.
     half4 result = mix(color, noiseCheckerFoil, u.blendFactor);
     result.a = originalAlpha;
+    // Ensure premultiplied alpha: fully transparent pixels have zero RGB
+    result.rgb *= originalAlpha;
     return result;
 }
 
@@ -187,6 +189,8 @@ half4 applyReflection(float2 position,
     // Blend the reflection with the original color
     half4 outColor = mix(color, reflectionColor, reflectionColor.a);
     outColor.a = originalAlpha;
+    // Ensure premultiplied alpha for correct compositing around transparent areas
+    outColor.rgb *= originalAlpha;
     return outColor;
 }
 
