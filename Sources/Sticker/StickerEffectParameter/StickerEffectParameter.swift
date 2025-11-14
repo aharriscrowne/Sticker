@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension EnvironmentValues {
     @Entry var stickerScale: Float = 3
     @Entry var stickerColorIntensity: Float = 0.8
@@ -20,6 +21,7 @@ extension EnvironmentValues {
     @Entry var stickerPattern: StickerPatternType = .diamond
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension View {
     public func stickerScale(_ scale: Float) -> some View {
         environment(\.stickerScale, scale)

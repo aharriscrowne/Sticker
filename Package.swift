@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Sticker",
     platforms: [
-        .iOS(.v17),
+        .iOS(.v15),
         .macOS(.v14),
         .visionOS(.v1)
     ],

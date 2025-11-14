@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 public struct PointerHoverStickerMotionEffect: StickerMotionEffect {
     let intensity: Double
 
@@ -39,6 +40,7 @@ public struct PointerHoverStickerMotionEffect: StickerMotionEffect {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 public extension StickerMotionEffect where Self == PointerHoverStickerMotionEffect {
     static var pointerHover: Self {
         .pointerHover()

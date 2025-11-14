@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 public protocol StickerMotionEffect: ViewModifier { }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension View {
     func applyTransform(for effect: some StickerMotionEffect) -> AnyView {
         AnyView(modifier(effect))
@@ -19,6 +21,7 @@ extension View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 public extension EnvironmentValues {
     @Entry var stickerMotionEffect: any StickerMotionEffect = IdentityStickerMotionEffect()
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import Observation
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 @Observable
 final class StickerShaderUpdater {
     typealias ChangeHandler = (_ motion: StickerMotion) -> Void
@@ -39,24 +40,28 @@ final class StickerShaderUpdater {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension StickerShaderUpdater: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(motion)
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension StickerShaderUpdater: Equatable {
     static func == (lhs: StickerShaderUpdater, rhs: StickerShaderUpdater) -> Bool {
         lhs.motion == rhs.motion
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension View {
     func onStickerShaderChange(_ onChange: @escaping @Sendable StickerShaderUpdater.ChangeHandler) -> some View {
         environment(\.stickerShaderUpdater, .init(onChange: onChange))
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension EnvironmentValues {
     @Entry var stickerShaderUpdater: StickerShaderUpdater = .init(onChange: { _ in })
 }

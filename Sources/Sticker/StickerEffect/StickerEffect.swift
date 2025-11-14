@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 private struct StickerEffectViewModifier: ViewModifier {
     @State private var motion: StickerMotion = .init()
 
@@ -70,6 +71,7 @@ private struct StickerEffectViewModifier: ViewModifier {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 extension View {
     @ViewBuilder
     public func stickerEffect(_ isEnabled: Bool = true) -> some View {
@@ -81,6 +83,8 @@ extension View {
     }
 }
 
+#if DEBUG && canImport(SwiftUI)
+@available(iOS 17.0, macOS 14.0, visionOS 1.0, *)
 #Preview {
     VStack {
         Circle()
@@ -113,3 +117,4 @@ extension View {
             .padding()
     }
 }
+#endif
