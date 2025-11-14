@@ -279,9 +279,8 @@ public final class StickerFoilView: MTKView {
     // MARK: - Motion configuration
 
     private func configureMotionEffect() {
-        // By default, hide the hotspot when switching modes; specific interactions will re-enable it.
-        isHighlightActive = false
-        reflectionIntensity = 0.0
+        // By default, show the hotspot when switching modes; specific interactions will re-enable it.
+        isHighlightActive = true
 
         switch motionEffect {
         case .identity:
@@ -310,13 +309,9 @@ public final class StickerFoilView: MTKView {
             let roll = motion.attitude.roll   // left/right
             let pitch = motion.attitude.pitch // up/down
 
-            let maxOffset: Float = 80.0
+            let offsetLocation: CGPoint = CGPoint(x: CGFloat(roll) * bounds.width, y: CGFloat(pitch) * bounds.height)
 
-            // Same sign convention as your drag code + applyTiltFromOffset
-            self.offset = SIMD2<Float>(
-                Float(roll)  * maxOffset,   // tilt right -> offset.x > 0
-                Float(pitch) * maxOffset    // tilt top toward you -> offset.y > 0
-            )
+            updateOffset(forLocation: offsetLocation)
         }
     }
 
@@ -354,7 +349,8 @@ public final class StickerFoilView: MTKView {
         let u = max(0, min(1, location.x / bounds.width))
         let v = max(0, min(1, location.y / bounds.height))
         // UV space in the shader already uses 0 at top, 1 at bottom
-        reflectionPosition = SIMD2<Float>(Float(u), Float(v))    }
+        reflectionPosition = SIMD2<Float>(Float(u), Float(v))
+    }
 
     private func applyTiltFromOffset() {
         let maxOffset: Float = 80.0
